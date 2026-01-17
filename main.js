@@ -1,6 +1,6 @@
 const api = "https://api-class-o1lo.onrender.com/api/damvt";
 const user = localStorage.getItem("user");
-
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 if (!user) {
   alert("Vui lòng đăng nhập để tiếp tục");
   window.location.href = "./auth/login.html";
@@ -78,6 +78,7 @@ function render() {
     .join("");
   renderSummary();
 }
+
 //end hiện ra màn hình
 //start thêm
 const transactionForm = document.getElementById("transactionForm");
@@ -86,7 +87,7 @@ transactionForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const error = document.getElementById("error");
-  const formData = new FormData(this);
+  const formData = new FormData(transactionForm);
 
   const payload = {
     name: formData.get("name").trim(),
@@ -96,8 +97,16 @@ transactionForm.addEventListener("submit", async function (e) {
     date: formData.get("date"),
   };
 
-  if (!payload.name || payload.amount <= 0 || !payload.date) {
-    error.innerText = "Vui lòng nhập đầy đủ và hợp lệ";
+  if (!payload.name) {
+    alert("Vui lòng nhập đầy đủ tên");
+    return;
+  }
+  if (payload.amount <= 0) {
+    alert("Vui lòng nhập giá");
+    return;
+  }
+  if (!payload.date) {
+    alert("Vui lòng nhập đầy đủ ngày");
     return;
   }
 
@@ -130,36 +139,35 @@ function editTransaction(id) {
 
   document.getElementById("editModal").classList.add("show");
 }
-document
-  .getElementById("editForm")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
+const editForm = document.getElementById("editForm");
+editForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const error = document.getElementById("editError");
-    const formData = new FormData(this);
+  const error = document.getElementById("editError");
+  const formData = new FormData(editForm);
 
-    const payload = {
-      name: formData.get("name").trim(),
-      amount: +formData.get("amount"),
-      type: formData.get("type"),
-      category: formData.get("category"),
-      date: formData.get("date"),
-    };
+  const payload = {
+    name: formData.get("name").trim(),
+    amount: +formData.get("amount"),
+    type: formData.get("type"),
+    category: formData.get("category"),
+    date: formData.get("date"),
+  };
 
-    if (!payload.name || payload.amount <= 0 || !payload.date) {
-      error.innerText = "Vui lòng nhập đầy đủ và hợp lệ";
-      return;
-    }
+  if (!payload.name || payload.amount <= 0 || !payload.date) {
+    error.innerText = "Vui lòng nhập đầy đủ và hợp lệ";
+    return;
+  }
 
-    try {
-      await axios.put(`${api}/transactions/${editingId}`, payload);
-      alert("Cập nhật thành công");
-      closeEditModal();
-      loadTransactions();
-    } catch (err) {
-      alert("Cập nhật thất bại");
-    }
-  });
+  try {
+    await axios.put(`${api}/transactions/${editingId}`, payload);
+    alert("Cập nhật thành công");
+    closeEditModal();
+    loadTransactions();
+  } catch (err) {
+    alert("Cập nhật thất bại");
+  }
+});
 function closeEditModal() {
   document.getElementById("editModal").classList.remove("show");
   document.getElementById("editForm").reset();
