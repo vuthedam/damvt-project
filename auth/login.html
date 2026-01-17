@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <link rel="stylesheet" href="./assets/styles/componnet/header.css" />
+    <link rel="stylesheet" href="./assets/styles/componnet/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <main id="login">
+      <div class="login-container">
+        <div class="login-left">
+          <img
+            src="https://tse3.mm.bing.net/th/id/OIP.Kiiy0wBVALl7PtRh3alwywHaE8?rs=1&pid=ImgDetMain&o=7&rm=3 "
+            alt="NFT Space Image"
+          />
+        </div>
+
+        <div class="login-right">
+          <h2>Login user</h2>
+
+          <form class="login-form" id="login-form">
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input name="email" type="email" placeholder="Email Address" />
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-key"></i>
+              <input type="password" placeholder="password" name="password" />
+            </div>
+            <button type="submit">Đăng nhập</button>
+            <a class="dangky" href="./register.html"
+              >Bạn đã có tài khoản chưa ?</a
+            >
+          </form>
+        </div>
+      </div>
+      <script src="./auth.js"></script>
+    </main>
+  </body>
+</html>

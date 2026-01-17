@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <main>
+      <div class="register-container">
+        <div class="register-left">
+          <img
+            src="https://tse3.mm.bing.net/th/id/OIP.Kiiy0wBVALl7PtRh3alwywHaE8?rs=1&pid=ImgDetMain&o=7&rm=3 "
+            alt="NFT Space Image"
+          />
+        </div>
+
+        <div class="register-right">
+          <h2>Regiser User</h2>
+
+          <form id="register-form" class="register-form">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" name="name" />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email Address" name="email" />
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-key"></i>
+              <input type="password" placeholder="password" name="password" />
+            </div>
+
+            <button type="submit">Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="./auth.js"></script>
+  </body>
+</html>

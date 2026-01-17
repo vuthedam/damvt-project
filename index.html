@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </header>
+    <h1>Quản lí chi tiêu</h1>
+    <div class="box">
+      <h2>Thêm giao dịch</h2>
+      <div class="error" id="error"></div>
+
+      <form id="transactionForm">
+        <input name="name" placeholder="Tên giao dịch" />
+        <input name="amount" type="number" placeholder="Số tiền" />
+
+        <select name="type">
+          <option value="thu">Thu</option>
+          <option value="chi">Chi</option>
+        </select>
+
+        <select name="category">
+          <option>Ăn uống</option>
+          <option>Đi lại</option>
+          <option>Giải trí</option>
+          <option>Học tập</option>
+          <option>Khác</option>
+        </select>
+
+        <input name="date" type="date" />
+        <button type="submit" id="submitBtn">Thêm</button>
+      </form>
+    </div>
+    <div class="box search-box">
+      <h2>Tìm kiếm giao dịch</h2>
+
+      <div class="search-row">
+        <input
+          type="text"
+          id="searchKeyword"
+          placeholder="🔍 Nhập tên giao dịch..."
+        />
+        <button onclick="searchByName()">Tìm</button>
+        <button onclick="resetSearch()">Reset</button>
+      </div>
+    </div>
+
+    <div class="box filter-box">
+      <h2>Lọc giao dịch</h2>
+
+      <div class="filter-row">
+        <div class="filter-item">
+          <label>Từ ngày</label>
+          <input type="date" id="fromDate" />
+        </div>
+
+        <div class="filter-item">
+          <label>Đến ngày</label>
+          <input type="date" id="toDate" />
+        </div>
+
+        <div class="filter-item">
+          <label>Danh mục</label>
+          <select id="filterCategory">
+            <option value="">Tất cả</option>
+            <option>Ăn uống</option>
+            <option>Đi lại</option>
+            <option>Giải trí</option>
+            <option>Học tập</option>
+            <option>Khác</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button onclick="filterTransactions()">Lọc</button>
+        <button class="reset" onclick="resetFilter()">Reset</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Danh sách giao dịch</h2>
+      <table border="1" width="100%">
+        <thead>
+          <tr>
+            <th>Tên</th>
+            <th>Số tiền</th>
+            <th>Loại</th>
+            <th>Danh mục</th>
+            <th>Ngày</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+      <!-- Popup sửa giao dịch -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <h2>Sửa giao dịch</h2>
+          <div class="error" id="editError"></div>
+
+          <form id="editForm">
+            <input name="name" placeholder="Tên giao dịch" />
+            <input name="amount" type="number" placeholder="Số tiền" />
+
+            <select name="type">
+              <option value="thu">Thu</option>
+              <option value="chi">Chi</option>
+            </select>
+
+            <select name="category">
+              <option>Ăn uống</option>
+              <option>Đi lại</option>
+              <option>Giải trí</option>
+              <option>Học tập</option>
+              <option>Khác</option>
+            </select>
+
+            <input name="date" type="date" />
+
+            <div class="modal-actions">
+              <button type="submit">Cập nhật</button>
+              <button type="button" onclick="closeEditModal()">Huỷ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <h2>Tổng quan</h2>
+      <p>Tổng thu: <b id="totalThu">0</b> đ</p>
+      <p>Tổng chi: <b id="totalChi">0</b> đ</p>
+      <p>Số dư hiện tại: <b id="balance">0</b> đ</p>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
