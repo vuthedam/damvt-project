@@ -1,10 +1,10 @@
 const api = "https://api-class-o1lo.onrender.com/api/damvt";
 const user = localStorage.getItem("user");
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 if (!user) {
   alert("Vui lòng đăng nhập để tiếp tục");
   window.location.href = "./auth/login.html";
 }
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 async function login(email, password) {
   try {
@@ -73,7 +73,7 @@ function render() {
         </td>
          
       </tr>
-    `
+    `,
     )
     .join("");
   renderSummary();
@@ -206,7 +206,7 @@ function searchByName() {
   }
 
   const filtered = transactions.filter((t) =>
-    t.name.toLowerCase().includes(keyword)
+    t.name.toLowerCase().includes(keyword),
   );
 
   renderFiltered(filtered);
@@ -224,13 +224,13 @@ function renderFiltered(data) {
         <td>${t.category}</td>
         <td>${t.date}</td>
         <td>
-          <button onclick="editTransaction(${t._id}')">Sửa</button>
+          <button onclick="editTransaction('${t._id}')">Sửa</button>
         </td>
         <td>
           <button onclick="deleteTransaction('${t._id}')">X</button>
         </td>
       </tr>
-    `
+    `,
     )
     .join("");
 }
@@ -238,6 +238,23 @@ function resetSearch() {
   document.getElementById("searchKeyword").value = "";
   render();
 }
+function filterTransactions() {
+  const category = document.getElementById("filterCategory").value;
+
+  if (!category) {
+    render();
+    return;
+  }
+
+  const filtered = transactions.filter((t) => t.category === category);
+
+  renderFiltered(filtered);
+}
+function resetFilter() {
+  document.getElementById("filterCategory").value = "";
+  render();
+}
+
 // delete
 async function deleteTransaction(id) {
   const confirmDelete = confirm("Bạn có chắc muốn xóa không?");
